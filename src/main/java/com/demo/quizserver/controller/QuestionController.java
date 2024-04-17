@@ -1,6 +1,7 @@
 package com.demo.quizserver.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,37 +27,37 @@ public class QuestionController {
 
     // /question/allQuestions -> For getting all the questions from db
     @GetMapping("allQuestions")
-    public List<Question> getQuestions() {
+    public ResponseEntity<List<Question>> getQuestions() {
         return questionService.getAllQuestions();
     }
 
     // /question?category -> For getting questions that belong to specific category
     @GetMapping("/")
-    public List<Question> getCategory(@RequestParam String category) {
+    public ResponseEntity<List<Question>> getCategory(@RequestParam String category) {
         return questionService.getByCategory(category);
     }
 
     // /question/:id -> For reading a specific ques using id
     @GetMapping("{id}")
-    public Question getQuestion(@PathVariable String id) {
+    public ResponseEntity<Question> getQuestion(@PathVariable String id) {
         return questionService.getQuestion(Integer.parseInt(id));
     }
 
     // /question/add -> For creating a new question
     @PostMapping("add")
-    public String addQuestion(@RequestBody Question question) {
+    public ResponseEntity<String> addQuestion(@RequestBody Question question) {
         return questionService.addQuestion(question);
     }
 
     // /question/:id -> Put for updating the value for that id
     @PutMapping("{id}")
-    public String updateQuestion(@PathVariable String id, @RequestBody Question question) {
+    public ResponseEntity<String> updateQuestion(@PathVariable String id, @RequestBody Question question) {
         return questionService.updateQuestion(Integer.parseInt(id), question);
     }
 
     // /question/:id -> For deleting the question with that id
     @DeleteMapping("{id}")
-    public String deleteQuestion(@PathVariable String id) {
+    public ResponseEntity<String> deleteQuestion(@PathVariable String id) {
         return questionService.deleteQuestion(Integer.parseInt(id));
     }
 }
