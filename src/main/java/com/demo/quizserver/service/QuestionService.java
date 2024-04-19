@@ -91,4 +91,13 @@ public class QuestionService {
             return new ResponseEntity<>("Error while updating!", HttpStatus.BAD_REQUEST);
         }
     }
+
+    public ResponseEntity<List<Question>> findRandomQuesByCategory(String category, Integer numQues) {
+        try {
+            List<Question> ques = questionDao.findRandomQuesByCategory(category, numQues);
+            return new ResponseEntity<>(ques, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ArrayList(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

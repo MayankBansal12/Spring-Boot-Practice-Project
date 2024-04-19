@@ -31,8 +31,8 @@ public class QuestionController {
         return questionService.getAllQuestions();
     }
 
-    // /question?category -> For getting questions that belong to specific category
-    @GetMapping("/")
+    // /question/:category -> For getting questions that belong to specific category
+    @GetMapping("")
     public ResponseEntity<List<Question>> getCategory(@RequestParam String category) {
         return questionService.getByCategory(category);
     }
